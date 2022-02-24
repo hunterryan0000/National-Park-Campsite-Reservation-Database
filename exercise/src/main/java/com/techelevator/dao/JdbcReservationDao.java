@@ -16,8 +16,8 @@ public class JdbcReservationDao implements ReservationDao {
     }
 
     @Override
-    public int createReservation(int siteId, String name, LocalDate fromDate, LocalDate toDate) {
-        return -1;
+    public Reservation createReservation(int siteId, String name, LocalDate fromDate, LocalDate toDate) {
+        return null;
     }
 
     private Reservation mapRowToReservation(SqlRowSet results) {

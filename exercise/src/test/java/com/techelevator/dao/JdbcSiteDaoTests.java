@@ -20,8 +20,7 @@ public class JdbcSiteDaoTests extends BaseDaoTests {
     @Test
     public void getSitesThatAllowRVs_Should_ReturnSites() {
         List<Site> sites = dao.getSitesThatAllowRVs(1);
-
-        assertEquals(2,sites.size());
+        assertEquals("For park 1, 2 sites should allow RVs (sites 1 and 2)", 2,sites.size());
     }
 
     public void getAvailableSites_Should_ReturnSites() {

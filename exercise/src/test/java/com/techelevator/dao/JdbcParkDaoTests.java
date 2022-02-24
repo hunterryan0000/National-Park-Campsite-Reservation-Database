@@ -21,9 +21,11 @@ public class JdbcParkDaoTests extends BaseDaoTests {
     public void getParksTest_Should_ReturnAllParksInLocationAlphaOrder() {
         List<Park> parks = dao.getAllParks();
 
-        assertEquals(2, parks.size());
-        assertEquals("Ohio", parks.get(0).getLocation());
-        assertEquals("Pennsylvania", parks.get(1).getLocation());
+        assertEquals("Should have 2 parks total", 2, parks.size());
+        assertEquals("Parks should be in alphabetical order: checking first", 
+                "Ohio", parks.get(0).getLocation());
+        assertEquals("Parks should be in alphabetical order: checking second", 
+                "Pennsylvania", parks.get(1).getLocation());
     }
 
 }

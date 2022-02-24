@@ -18,7 +18,7 @@ public class JdbcCampgroundDao implements CampgroundDao {
 
     @Override
     public List<Campground> getCampgroundsByParkId(int parkId) {
-        return new ArrayList<>();
+        return null;
     }
 
     private Campground mapRowToCampground(SqlRowSet results) {
