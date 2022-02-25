@@ -19,8 +19,9 @@ public class JdbcSiteDao implements SiteDao {
     @Override
     public List<Site> getSitesThatAllowRVs(int parkId) {
         List<Site> site = new ArrayList<>();
-        String sql = "SELECT * from site where max_rv_length > 0;";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        String sql = "SELECT *, park_id from site join campground on site.campground_id = campground.campground_id\n" +
+                "where park_id = ? AND max_rv_length > 0;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, parkId);
         while (results.next()){
             site.add(mapRowToSite(results));
         }
