@@ -41,6 +41,21 @@ public class JdbcReservationDao implements ReservationDao {
         return reservation;
     }
 
+    @Override
+    public List<Reservation> upcomingReservations(int parkId) {
+        List<Reservation> reservations = new ArrayList<>();
+        String sql = "select reservation.* FROM reservation \n" +
+                "JOIN site ON reservation.site_id = site.site_id\n" +
+                "JOIN campground on site.campground_id = campground.campground_id\n" +
+                "WHERE park_id = ? AND ((CURRENT_DATE + 30) > from_date) AND (CURRENT_DATE < from_date)\n" +
+                "ORDER BY from_date;\n;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, parkId);
+        while (results.next()){
+            reservations.add(mapRowToReservation(results));
+        }
+        return reservations;
+    }
+
     private Reservation mapRowToReservation(SqlRowSet results) {
         Reservation r = new Reservation();
         r.setReservationId(results.getInt("reservation_id"));

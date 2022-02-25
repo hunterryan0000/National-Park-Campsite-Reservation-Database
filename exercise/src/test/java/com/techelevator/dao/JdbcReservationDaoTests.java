@@ -1,14 +1,22 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Reservation;
+import com.techelevator.model.Site;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
 public class JdbcReservationDaoTests extends BaseDaoTests {
+
+    private static final Reservation RESERVATION_1 = new Reservation(1, 1, "Test Testerson",
+            LocalDate.now().plusDays(1L), LocalDate.now().plusDays(5L), LocalDate.now().plusDays(-23L));
+
+    private static final Reservation RESERVATION_2 = new Reservation(2, 1, "Bob Robertson",
+            LocalDate.now().plusDays(11L), LocalDate.now().plusDays(18L), LocalDate.now().plusDays(-23L));
 
     private ReservationDao dao;
 
@@ -37,6 +45,16 @@ public class JdbcReservationDaoTests extends BaseDaoTests {
         reservation.setReservationId(created.getReservationId());
         reservation.setCreateDate(created.getCreateDate());
         assertReservationsMatch(reservation, created);
+    }
+
+    @Test
+    public void upcomingReservations_should_return_ListReservations(){
+        List<Reservation> reservations = dao.upcomingReservations(1);
+        assertEquals("The test data returns two reservations for test parkId 1", 2,reservations.size());
+        assertReservationsMatch(RESERVATION_1, reservations.get(0));
+        assertReservationsMatch(RESERVATION_2, reservations.get(1));
+
+
     }
 
     private void assertReservationsMatch(Reservation r1, Reservation r2) {
