@@ -1,4 +1,4 @@
-# Week 2 Review: National Park Campsite (Part 2)
+# National Park Campsite
 
 In this exercise, you'll continue working with the National Park Campsite Reservation database. You'll now create DAO methods and integration tests.
 
